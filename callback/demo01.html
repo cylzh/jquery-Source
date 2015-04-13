@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/aQuery.js"></script>
+    <script src="../lib/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <script>
+//        function Aaron(List, callback) {
+//            setTimeout(function() {
+//                var task = List.shift();
+//                task(); //执行函数
+//                if (List.length >0) {  //递归分解
+//                    setTimeout(arguments.callee, 1000)
+//                } else {
+//                    callback()
+//                }
+//            }, 25)
+//        }
+//
+//        Aaron([function(){
+//            console.log('a')
+//        },function(){
+//            console.log('b')
+//        }],function(){
+//            console.log('callback')
+//        })
+
+        //jquery callbacks
+
+//        var callback= $.Callbacks();
+//        console.log(callback);
+//        callback.add('a',function(){
+//            console.log('callback: a');
+//        });
+//        callback.fire('a');
+
+
+        function fn1( value ) {
+            console.log( value );
+        }
+
+        function fn2( value ) {
+            fn1("fn2 says: " + value);
+            return false;
+        }
+
+        function fn3(){
+            console.log(3);
+        }
+
+        var callbacks = $.Callbacks("once");
+//        callbacks.add( fn1 );
+//
+//        // outputs: foo!
+//        callbacks.fire( "foo!" );
+
+        callbacks.add( [fn1,fn2],fn3 );
+
+        //callbacks.add([function,][array]);
+
+        // outputs: bar!, fn2 says: bar!
+        callbacks.fire("fn2" );
+
+        aQuery.Observable.add(function(){
+            console.log("test");
+        });
+
+        aQuery.Observable.fire();
+    </script>
+</body>
+</html>

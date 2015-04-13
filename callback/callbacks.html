@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <script>
+        function fn1(){
+            console.log(1);
+        }
+
+        function fn2(){
+            console.log(2);
+        }
+
+        var callback= $.Callbacks("once")
+        callback.add(fn1,fn1,fn2);
+        //callback.remove(fn1);
+
+        callback.fire(fn2)
+        console.log(callback.has());
+
+
+
+        var observer={
+            hash:{},
+            subscribe:function(id,callback){
+                if(typeof id!=="string"){
+                    return this;
+                }
+
+                //避免多次生成
+                if(!this.hash[id]){
+                    this.hash[id]= $.Callbacks();
+                }
+                this.hash[id].add(callback);
+
+
+            },
+            publish:function(id){
+                if(!this.hash[id])
+                    return;
+
+                this.hash[id].fire(id);
+
+            }
+        }
+        observer.subscribe('mailArrived', function() {
+            alert('来信了')
+        })
+        observer.subscribe('mailArrived', function() {
+            alert('又来信了')
+        })
+        observer.subscribe('mailSend', function() {
+            alert('发信成功')
+        })
+
+        observer.publish('mailArrived')
+        // 发布
+        //observer.publish('mailSend')
+
+    </script>
+</body>
+</html>

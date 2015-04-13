@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/aQuery.js"></script>
+    <script src="../lib/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <script>
+        //callback写法
+        function a(callback){
+            callback();
+        }
+
+        function done(){
+            console.log("done");
+        }
+
+        a(done);
+
+        //deferred
+        var defer= $.Deferred();
+        defer.resolve(function(){})
+        defer.then(function(){
+            console.log("then");
+        })
+
+
+        //
+        $.ajax("demo01.html").done(function(){
+            console.log("第一个回调函数");
+
+        }).done(function(){
+            console.log("第二个回调函数")
+        });
+
+        $.when($.ajax("demo01.html"), $.ajax("deferred.html")).done(function(){
+            console.log("执行成功")
+        }).fail(function(){
+            console.log("执行失败")
+        })
+
+
+
+//        function wait(){
+//            setTimeout(function(){
+//                console.log("我是本地很耗时的操作")
+//            },5000);
+//        }
+//
+//
+//        $.when(wait()).done(function(){
+//            console.log("我是很耗时的回调函数");
+//        });
+
+        //$.when的参数必须是deferred对象
+
+
+        function wait(){
+            var dtd= $.Deferred();
+            setTimeout(function(){
+                console.log("我是本地很耗时的操作");
+
+                //改变状态
+                dtd.resolve();
+                //dtd.reject();
+            },5000);
+            return dtd.promise();
+        }
+
+        $.when(wait()).done(function(){
+            console.log("我是很耗时的回调函数");
+        }).fail(function(){
+            console.log('执行失败')
+        });
+
+        console.log($.Deferred())
+    </script>
+</body>
+</html>
