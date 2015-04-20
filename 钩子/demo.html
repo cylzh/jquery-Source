@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/jquery-1.11.2.js"></script>
+</head>
+<body>
+<div id="Aaron" type="type" checked="checked" style="width:100px;height:100px;border:1px solid #333;"></div>
+<script>
+
+    console.log($("#Aaron").prop("checked"))
+    console.log($("#Aaron").attr("checked"))
+    console.log($("#Aaron").prop("alt"))
+    $(function(){
+        if ( !$.cssHooks ) {
+            throw("jQuery 1.4.3+ is needed for this plugin to work");
+            return;
+        }
+
+        function styleSupport( prop ) {
+            var vendorProp, supportedProp,
+                    capProp = prop.charAt(0).toUpperCase() + prop.slice(1),
+                    prefixes = [ "Moz", "Webkit", "O", "ms" ],
+                    div = document.createElement( "div" );
+
+            if ( prop in div.style ) {
+                supportedProp = prop;
+            } else {
+                for ( var i = 0; i < prefixes.length; i++ ) {
+                    vendorProp = prefixes[i] + capProp;
+                    if ( vendorProp in div.style ) {
+                        supportedProp = vendorProp;
+                        break;
+                    }
+                }
+            }
+
+            div = null;
+            $.support[ prop ] = supportedProp
+            return supportedProp;
+        }
+
+        var borderRadius = styleSupport( "borderRadius" );
+
+        // Set cssHooks only for browsers that
+        // support a vendor-prefixed border radius
+        if ( borderRadius && borderRadius !== "borderRadius" ) {
+            $.cssHooks.borderRadius = {
+                get: function( elem, computed, extra ) {
+                    return $.css( elem, borderRadius );
+                },
+                set: function( elem, value) {
+                    elem.style[ borderRadius ] = value;
+                }
+            };
+        }
+        $("#Aaron").css("border-Radius", "10px")
+    });
+
+
+    //jQuery优先尝试使用hooks中对象方法来解决css, attr, prop, val 访问
+    $.attrHooks.open={
+        get: function (elem) {
+            return $(elem).attr('is-open');
+        },
+        set: function (elem, val) {
+            return $(elem).attr('is-open', val);
+        }
+    }
+
+    jQuery(function ($) {
+        $('#Aaron').attr('open', 'open');
+        console.log( $('#Aaron').attr('is-open') ); // 'open'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <div id="div">test</div>
+    <script>
+        //js对象
+//        var myObj={};
+//        $.data(myObj,"name","jack");
+//        console.log($.data(myObj,"name"));
+//        console.dir(myObj);
+//
+//        //htmlelement
+        var div=$("#div");
+        div.data("name","jack");
+        div.data("name","jack2")
+        console.log(div.data("name"));
+        console.log(div);
+//
+//        var div=$("#div");
+//       $.data(div,'name',"jack");
+//        $.data(div,"name","jack2")
+//        console.log(div)
+    </script>
+
+    <div id="xx"></div>
+    <script>
+//        var el =$('#xx');
+//        console.log($.data(el, 'name', 'jack3'));
+//        console.log(el)
+//        console.log(el[jQuery.expando]); // 1
+//        console.log(jQuery.cache); // {1 : {name:'jack'}}
+
+        var el1=$("#xx");
+//        $.data(el1,"name","jack4");
+//
+//        console.log($.data(el1,"name")); // 1
+//        console.log(jQuery.cache); // {1 : {name:'jack'}}
+
+        el1.data("name","jack5");
+        el1.data("name","jack6")
+        console.log(el1.data("name"))
+//        el1.each(function(){
+//            console.log(this)
+//        })
+    </script>
+</body>
+</html>

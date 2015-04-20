@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        //console.count
+
+
+        for(var i=0;i<5;i++){
+            console.count('count')
+        }
+        // count:1
+
+        var obj={
+            name:"classicemi",
+            major:"ei"
+        }
+
+        console.dir(obj)//对象的详细信息
+        console.log(obj)
+        console.dir(3);
+        //层级
+        console.log(1);
+        console.group();
+        console.log(2);
+        console.group();
+        console.log(3)
+        console.groupEnd();
+        console.log(2)
+        console.groupEnd()
+        console.log(1);
+
+
+        function tracer(a) {
+            console.trace();
+            return a;
+        }
+
+        function foo(a) {
+            return bar(a);
+        }
+
+        function bar(a) {
+            return tracer(a);
+        }
+
+        var a = foo('tracer');
+        //console.trace();
+
+
+        console.log('%c AliPay %c Copyright @%s', 'font-size:48px;color:#47a8ef;-webkit-text-fill-color:#47a8ef;-webkit-text-stroke: 1px black;', 'font-size:12px;color:#999;', new Date().getFullYear());
+
+        // %s字符
+        console.log('%c%s %c Copyright %d',"height:80px;width:200px;font-size:80px;color:red;background:url(http://www.zlbaba.com/frontlib/content/images/logo.png) no-repeat","zlbaba","font-size:12px;color:#999;",new Date().getFullYear())
+        console.log("\n 欢迎访问 %s","http://www.zlbaba.com")
+    </script>
+</body>
+</html>
