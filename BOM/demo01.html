@@ -5,6 +5,59 @@
     <title></title>
 </head>
 <body>
-    
+    <a href=""></a>
+    <script>
+
+        //window的双重功能 1.访问浏览器窗口的接口。2.global对象
+
+
+        //1.全局作用域 （全局变量都作为window的属性）
+        var age=29;
+        function sayAge(){
+            console.log(this.age);
+        }
+
+        console.log(delete window.age)//全局变量不能通过delete删除，而直接定义在window上的属性可以删除。
+        console.log(window.age);
+
+        //console.log(b); //访问不存在的全局变量会报错
+        console.log(window.b);//而访问不存在的属性则不会
+
+        //导航和打开新窗口
+       // var newWindow=window.open();
+        //console.log(newWindow)
+        //newWindow.location.href="http://www.baidu.com";
+
+
+        //navigator对象
+        //1.插件检测
+            //plugins name
+        //非ie检测插件
+        function hasPlugin(name){
+            name=name.toLowerCase();
+            var plugin=navigator.plugins;
+            for(var i=0;i<plugin.length;i++){
+                if(plugin[i].name.toLowerCase().indexOf(name)>-1){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        console.log(hasPlugin("Flash"));
+        //ie中插件的检查 ActiveXObject
+
+        function hasIePlugin(type){
+            try{
+                var active=new ActiveXObject(type);
+                return true;
+            }catch (ex){
+                return false;
+            }
+        }
+
+
+
+    </script>
 </body>
 </html>
