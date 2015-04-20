@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/jquery-1.11.2.js"></script>
+   <!-- <script src="../lib/placeholder.js"></script>-->
+</head>
+<body>
+    <div id="div1" class="">提交1</div>
+    <form action="http://www.baidu.com" method="get">
+        <input type="text" placeholder="这里是测试placeholder">
+        <input type="submit" value="提交">
+    </form>
+    <script>
+        $("#div1").click(function(){
+            $("form").submit();
+        })
+
+        $(document).delegate('form', 'submit.x', function() {
+            alert(1)
+            // Clear the placeholder values so they don't get submitted
+            var $inputs = $('.'+settings.customClass, this).each(clearPlaceholder);
+            setTimeout(function() {
+                $inputs.each(setPlaceholder);
+            }, 10);
+        });
+    </script>
+</body>
+</html>

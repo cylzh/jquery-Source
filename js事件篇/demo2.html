@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/eventUtil.js"></script>
+</head>
+<body>
+    <div>事件类型</div>
+    <ul>
+        <li id="load">load图片</li>
+        <li id="loadJs">load脚本</li>
+        <li id="loadCss">load样式</li>
+    </ul>
+    <div id="loadContent" style="width:100px;height:100px;overflow: hidden;"></div>
+    <script>
+        //事件类型
+        var loadContent=document.getElementById("loadContent");
+        var load=document.getElementById("load");
+        EventUtil.addHandler(load,'click',function(){
+            var img=new Image();
+
+            EventUtil.addHandler(img,"load",function(){
+                console.log("下载完毕！");
+            })
+            EventUtil.addHandler(img,"error",function(){
+                console.log("图片下载失败")
+            });
+            //load可以用来判断图片加载完毕。注意：新创建的图像元素不是在加载到页面中才开始下载，而是设置src之后就开始下载。
+            console.log("开始下载...")
+            img.src="http://localhost:8080/frontlib/content/images/index/ner-02.jpg";
+
+            loadContent.appendChild(img);
+        });
+
+        //load可以用来判断js加载完成。<script>元素可以触发load事件，来判断动态加载的js文件是否加载完成。它和img不同，必须设置了src属性并且添加到文档之后才会开始下载。
+        var loadJs=document.getElementById("loadJs");
+        EventUtil.addHandler(loadJs,'click',function(){
+            var script=document.createElement("script");
+            script.src="http://localhost:8080/frontlib/js/sea-modules/seajs/seajs/2.1.0/sea.js";
+            document.body.appendChild(script);
+        });
+
+
+        var loadCss=document.getElementById("loadCss");
+        EventUtil.addHandler(loadCss,'click',function(){
+            var style=document.createElement("link");
+            style.href="http://localhost:8080/frontlib/content/style/index/index2.css";
+            style.rel="stylesheet";
+            document.head.appendChild(style);
+        });
+
+
+        //resize事件
+
+        //beforeunload
+        EventUtil.addHandler(window,'beforeunload',function(e){
+            e.returnValue="确定关闭吗"
+            return "确定关闭吗？";
+        });
+
+
+        /*
+        * 事件类型
+        * 1.鼠标事件
+        * 2.键盘事件
+        * 3.HTML事件
+        * 4.变动事件
+        * */
+
+
+        /*
+        *鼠标事件
+        * */
+        //click
+        //dblclick
+        EventUtil.addHandler(loadJs,'dblclick',function(){
+            console.log("双击");
+        });
+
+     </script>
+</body>
+</html>

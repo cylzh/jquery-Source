@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/eventUtil.js"></script>
+</head>
+<body>
+    <ul>
+        <li id="load">load图片</li>
+        <li id="loadJs">load脚本</li>
+        <li id="loadCss">load样式</li>
+    </ul>
+    <script>
+        //事件委托
+     /*   EventUtil.addHandler(document.body,'click',function(e){
+           e=EventUtil.getEvent(e);
+           var target=EventUtil.getTarget(e);
+           switch (target.id){
+               case "load":
+                  console.log("这里是触发的图片load");
+                  break;
+               case "loadJs":
+                   console.log("这里是触发的脚本load");
+                   break;
+               case "loadCss":
+                   console.log("这里是触发的样式load");
+                   break;
+           }
+        })*/
+
+      EventUtil.addHandler(load,'click',function(){
+            var img=new Image();
+
+            EventUtil.addHandler(img,"load",function(){
+                console.log("下载完毕！");
+            });
+            //load可以用来判断图片加载完毕。注意：新创建的图像元素不是在加载到页面中才开始下载，而是设置src之后就开始下载。
+            console.log("开始下载...")
+            img.src="http://localhost:8080/frontlib/content/images/index/banner-02.jpg";
+
+            loadContent.appendChild(img);
+        });
+
+        //load可以用来判断js加载完成。<script>元素可以触发load事件，来判断动态加载的js文件是否加载完成。它和img不同，必须设置了src属性并且添加到文档之后才会开始下载。
+        var loadJs=document.getElementById("loadJs");
+        EventUtil.addHandler(loadJs,'click',function(){
+            var script=document.createElement("script");
+            script.src="http://localhost:8080/frontlib/js/sea-modules/seajs/seajs/2.1.0/sea.js";
+            document.body.appendChild(script);
+        });
+
+
+        var loadCss=document.getElementById("loadCss");
+        EventUtil.addHandler(loadCss,'click',function(){
+            var style=document.createElement("link");
+            style.href="http://localhost:8080/frontlib/content/style/index/index2.css";
+            style.rel="stylesheet";
+            document.head.appendChild(style);
+        });
+
+        //事件委托与事件绑定的区别级好处。1.书写方便。2.事件委托避免了事件的多次绑定，通过绑定在父元素绑定事件。3.避免内存泄露
+
+
+        //DOM事件模拟
+
+
+    </script>
+</body>
+</html>
