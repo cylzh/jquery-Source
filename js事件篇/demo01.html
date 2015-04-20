@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+    <div>其他</div>
+    <a id="div1" href="http://www.baidu.com" target="_blank">代码改变事件</a>
+    <script>
+        /* 参考：http://www.cnblogs.com/janes/p/3912677.html
+        * 1.事件流 1.ie 冒泡 2、netscapte 捕获 3、dom2 的事件流 （捕获，目标，冒泡）
+        * 2.事件处理程序 1、dom0 2、dom2 3、ie (注意点：1.this（ie的事件处理程序，this指向window，其他的事件处理程序指向当前执行元素） 2.事件名(dom0及ie的事件处理程序要加上on前缀))
+        * 3.事件对象 (event) dom0的事件对象是挂载在window对象上的，其他的是直接出入事件处理程序。 常用的一些属性 （stopPragration,preventDefault,target,currentTraget,ie事件对象，returnValue,cancleBubble,srcElement）
+        *
+        * */
+
+        //dom0级事件处理程序 event对象通过window.event来获取
+        var div1=document.getElementById("div1");
+     /*   div1.onclick=function(){
+             //this 指向当前元素
+            console.dir(this)
+            console.log(this.innerHTML);
+        };
+
+        div1.onclick=function(){
+            console.log("测试dom0级多个事件绑定");
+        }*/
+
+        var EventUtil={
+            addHandler:function(obj,type,handler){
+                if(obj.addEventListener){
+                    obj.addEventListener(type,handler,false);
+                }else if(obj.attachEvent){
+                    obj.attachEvent('on'+type,handler);
+                }else{
+                    obj['on'+type]=handler;
+                }
+            },
+            removeHandler:function(obj,type,handler){
+                if(obj.removeEventListener){
+                    obj.removeEventListener(type,handler,false);
+                }else if(obj.detachEvent){
+                    obj.detachEvent('on'+type,handler);
+                }else{
+                    obj["on"+type]=null;
+                }
+            },
+
+            getEvent:function(event){
+                return event||window.event;
+            },
+
+            getTarget:function(event){
+               var event=this.getEvent(event);
+                return event.target||event.srcElement;
+            },
+
+            preventDefault:function(event){
+               var event=this.getEvent(event);
+               if(event.preventDefault){
+                   event.preventDefault();
+               }else{
+                   event.returnValue=false;
+               }
+            },
+
+            stopPropagation:function(event){
+                var event=this.getEvent(event);
+                if(event.stopPropagation){
+                    event.stopPropagation();
+                }else{
+                    event.cancelBubble=true;
+                }
+            }
+        }
+
+        //dom2级事件处理程序
+        var fn1=function(event){
+            console.log("第一个事件");
+        }
+        var fn2=function(event){
+
+        /*    console.log(this);//指向当前正在处理的元素
+            console.log(event.type);
+            console.log(event.currentTarget);//指向当前正在处理的元素
+            console.log(event.target);//表示事件的实际目标*/
+            switch (event.type){
+                case "click":
+                   // console.log("点击事件");
+
+                   /* event.preventDefault();
+                    event.stopPropagation();*/
+                    console.log(event.srcElement);//等同于dom中的target属性
+                    event.cancelBubble=true;
+                    event.returnValue=false;
+                    break;
+                case 'mouseover':
+                    //event.target.style.backgroundColor="red";
+                    break;
+                case 'mouseout':
+                    //event.target.style.backgroundColor="";
+                    break;
+            }
+        }
+
+        EventUtil.addHandler(div1,'click',fn2);
+        EventUtil.addHandler(document.body,'mouseover',fn2);
+        EventUtil.addHandler(document.body,"mouseout",fn2);
+
+        EventUtil.addHandler(document.body,'click',fn2);
+
+       /* div1.addEventListener('click',fn1,false);
+
+        div1.addEventListener("click",function(){
+            console.log("第二个事件")
+        },false);
+
+        //不能删除匿名函数，删除的函数跟绑定的函数一致。
+        div1.removeEventListener("click",fn1,false)*/
+
+    </script>
+</body>
+</html>
