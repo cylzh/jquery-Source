@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>这里是文档信息</title>
+</head>
+<body>
+    <div id="div1">22222</div>
+    <script>
+        //Document类型
+            console.dir(document)//HTMLDocument的实例
+            console.log(document.nodeType);//9
+            console.log(document.nodeName);//#document
+            console.log(document.nodeValue)//null
+
+
+        //文档的子节点
+        var html=document.documentElement;
+        var body=document.body;
+
+        //documentType
+        var doctype=document.doctype
+
+        //文档信息
+        var title=document.title;
+
+        //查找元素
+        var div1=document.getElementById("div1");
+        var divs=document.getElementsByTagName("div");
+        var divname=document.getElementsByName("name")
+
+        //文档写入
+        window.onload=function(){
+            document.write("111");
+        }
+
+
+        //document.write()注意点
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <div id="div1">   </div>
+    <script>
+        //文本节点
+
+        //文本节点特性
+        var div=document.getElementById("div1");
+        var textNode=div.firstChild;
+        console.log(textNode.nodeType);//3
+        console.log(textNode.nodeName);//#text
+        console.log(textNode.nodeValue==textNode.data);//null
+        textNode.nodeValue="<strong>222</strong>"
+
+
+        //创建文本节点
+
+
+
+
+    </script>
+</body>
+</html>

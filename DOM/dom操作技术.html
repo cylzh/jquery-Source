@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+
+        //dom操作技术
+        //动态创建脚本两种方式
+        //1。创建外部引用
+
+        var script=document.createElement("script");
+        script.src="../lib/jquery-1.11.2.js";
+        document.body.appendChild(script);
+
+        //2.直接插件js代码
+        var script1=document.createElement("script");
+        console.dir(script1);
+        //script1.appendChild(document.createTextNode("function sayHello(){console.log('hello world')}"))
+        script1.text="function sayHello(){console.log('hello world')}";
+        document.body.appendChild(script1);
+
+        sayHello();
+
+        //style操作
+        var link=document.createElement("link");
+        link.href="../lib/test.css";
+        link.rel="stylesheet";
+        link.type="text/css";
+        var head=document.getElementsByTagName("head")[0];
+        head.appendChild(link)
+
+
+        //内部样式
+        var link1=document.createElement("link");
+        link1.href="../lib/test.css";
+        link1.rel="stylesheet";
+        link1.type="text/css";
+        link1.styleSheet.cssText=""
+        var head=document.getElementsByTagName("head")[0];
+        head.appendChild(link1);
+
+    </script>
+</body>
+</html>
