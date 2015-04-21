@@ -5,6 +5,28 @@
     <title></title>
 </head>
 <body>
-    
+    <script>
+        //window 对象方法
+
+
+        //瀏覽器版本判斷
+
+        //插件檢測
+        function hasPlugin(name){
+            name=name.toLowerCase();
+            var plugins=navigator.plugins;
+            for(var i=0;i<plugins.length;i++){
+                if(plugins[i].indexOf(name)>-1){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+
+
+    </script>
 </body>
 </html>
