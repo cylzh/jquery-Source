@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/jquery-1.11.2.js"></script>
+</head>
+<body>
+    <div id="inner" class="inner">
+    </div>
+    <script>
+        //dom操作函数
+        var inner=document.getElementById("inner");
+
+
+        inner.appendChild(document.createElement("span"));
+        var span=document.createElement("span");
+        span.id="test";
+
+        inner.parentNode.insertBefore(span,inner);
+
+
+        $(".inner").after(function(){
+            return '<div>'+this.className+'</div>'
+        })
+
+
+        //文档片段
+        //dom每一个操作都会导致回流，渲染。 createElement创建出来的元素可以重复操作，而Fragment只能操作一次。添加过后就不能操作了。
+        var fargment=document.createDocumentFragment();
+        console.log(fargment.nodeType);
+
+
+
+
+
+    </script>
+</body>
+</html>
