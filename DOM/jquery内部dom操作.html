@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="inner">
+        <div class="test"></div>
+
+    </div>
+
+
+    <script>
+        var inner=document.getElementById("inner");
+
+        function after(ele){
+            var div=document.createElement("div");
+            div.id="after";
+            ele.parentNode.insertBefore(div,ele.nextSibling);
+        }
+
+        function before(ele){
+            var div=document.createElement("div");
+            div.id="before";
+            ele.parentNode.insertBefore(div,ele);
+        }
+
+
+        function prepend(ele){
+            var div=document.createElement("div");
+            div.id="prepend";
+            ele.insertBefore(div,ele.firstChild);
+        }
+        after(inner);
+        before(inner);
+        prepend(inner);
+
+
+        //inner.innerHTML="test";
+        //inner.outerHTML="test";
+
+
+        inner.lastChild.nodeValue="test1";
+    </script>
+</body>
+</html>

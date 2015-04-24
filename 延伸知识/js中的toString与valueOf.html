@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+
+        //详情参见http://1.liangtao.sinaapp.com/?p=555
+        //隐式转换 valueOf优先级大于toString。
+
+        var bbb = {
+            i: 10,
+            toString: function() {
+                console.log('toString');
+                return this.i;
+            },
+            valueOf: function() {
+                console.log('valueOf');
+                return this.i;
+            }
+        }
+
+
+        //+会调用valueOf方法，如果没有valueOf,会调用toString()
+        console.log(+bbb);//
+
+        //双目操作符，如果操作数中间包含字符串，则会把另一个转换成字符串，如果包含对象则先调用valueOf(),然后在转换。
+        console.log(bbb+1);
+        console.log(bbb+"1");
+
+        console.log(bbb-1);
+        console.log(bbb-"1");
+
+        console.log(Boolean(bbb));
+        console.log(bbb&&1);
+
+        //< > <= >=
+        console.log(bbb<1)
+
+        //==
+        console.log(bbb==10)
+
+        // ===
+        console.log(bbb===10)
+
+    </script>
+</body>
+</html>

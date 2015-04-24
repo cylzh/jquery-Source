@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../lib/jquery-1.11.2.js"></script>
+    <script src="../lib/aQuery.js"></script>
+</head>
+<body>
+    <script>
+       /* var a=$("")
+        console.log(a);*/
+
+        var b=aQuery("")
+        console.log(b);
+
+        //如何把一个对象模拟成一个数组
+
+
+        var arr=[];
+
+        var obj={
+            length:0,
+
+            push:arr.push,
+            slice:arr.slice,
+            sort:arr.sort
+        }
+
+        obj.push(1);
+        console.dir(obj);
+        console.dir(arr);
+
+
+
+    </script>
+</body>
+</html>
