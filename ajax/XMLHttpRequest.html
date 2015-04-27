@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <script>
+
+        /*
+        * xhr.status//服务器返回的状态码
+        * xhr.readystate//xhr请求状态属性
+        * */
+        var xhr=new XMLHttpRequest();
+        console.dir(xhr);
+
+        console.log(xhr.readyState)
+        //readyState每发生一次变化就出发一下readystatechange
+        xhr.onreadystatechange=function(){
+            var complated=4;
+            if(xhr.readyState==complated){
+                if(xhr.status==200){
+                    //成功
+                    console.log(xhr.responseText);
+                    console.log("xhr:%s","success");
+                }else{
+                    //失败
+                }
+            }
+        }
+
+        /*
+        *
+        * 指定发送请求的方式
+        * 1.请求方式
+        * 2.请求路径
+        * 3.是否异步
+
+        * */
+
+        xhr.open('POST',"../BOM/demo01.html",true);
+        console.log(xhr.readyState)
+
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+        var formData=new FormData();
+        formData.append("userName","张三");
+
+        var oFileBody = '<a id="a"><b id="b">hey!</b></a>'; // Blob对象包含的文件内容
+        var oBlob = new Blob([oFileBody], { type: "text/xml"});
+
+
+
+        /*
+        *发送
+        * */
+        xhr.send(null);
+        console.log(xhr.readyState)
+
+
+    </script>
+</body>
+</html>

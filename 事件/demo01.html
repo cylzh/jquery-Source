@@ -1097,9 +1097,28 @@
     <div></div>
     <script>
 
-        $("div").click("1",function(event){
+        $("div").click(function(event){
             console.log();
         })
+
+        //move
+
+
+        //movebefore ,moveing moveend
+      $(document).delegate("div","movebefore",function(){
+          console.log("movebefore");
+      })
+
+
+
+      document.addEventListener("click",function(event){
+
+
+      },false);
+
+      $("div").trigger("movebefore");
+
+
     </script>
 
 </body>

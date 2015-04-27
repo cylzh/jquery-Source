@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        //js 执行上下文，改变上下文
+
+        function add(a,b)
+        {
+            console.dir(this);
+            console.log(a+b);
+        }
+        function sub(a,b)
+        {
+            alert(a-b);
+        }
+
+        add.call(sub,3,1);
+
+
+
+        /*function Animal(){
+            this.name = "Animal";
+            this.showName = function(){
+                console.log(this.name);
+            }
+        }
+
+        function Cat(){
+            this.name = "Cat";
+        }
+
+        var animal = new Animal();
+        var cat = new Cat();
+
+        //通过call或apply方法，将原本属于Animal对象的showName()方法交给对象cat来使用了。
+        //输入结果为"Cat"
+        animal.showName.call(cat,",");
+        //animal.showName.apply(cat,[]);*/
+
+        function Animal(name,age){
+            this.name = name;
+            this.age=age;
+            this.showName = function(){
+                console.log("name %s,age %s",this.name,this.age);
+            }
+        }
+
+        function Cat(){
+           // this.name = "Cat";
+            Animal.apply(this,arguments);
+
+
+        }
+
+       // var animal = new Animal();
+        var cat = new Cat("black cat",20);
+
+        //通过call或apply方法，将原本属于Animal对象的showName()方法交给对象cat来使用了。
+        //输入结果为"Cat"
+        cat.showName();
+
+
+
+
+
+    </script>
+</body>
+</html>
